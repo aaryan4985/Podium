@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore, GameMode } from '@/store/gameStore';
-import { Loader2, Brain, Skull, Fingerprint, Eye, Search, AlertTriangle, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Loader2, Brain, Skull, Fingerprint, Eye, Search, AlertTriangle, ChevronRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 export default function PodiumApp() {
@@ -152,8 +152,11 @@ function GeneratingScreen({ mode }: { mode: GameMode }) {
 }
 
 function StoryScreen() {
-  const { sceneContent, setUserGuessed } = useGameStore();
+  const { sceneContent, setUserGuessed, resetGame, mode } = useGameStore();
   const [guess, setGuess] = useState("");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isScanning, setIsScanning] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -162,6 +165,14 @@ function StoryScreen() {
     }
   };
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current || !isScanning) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const isDark = mode === 'dark_manipulation';
+
   return (
     <motion.div
       initial={{ opacity: 0, filter: 'blur(10px)' }}
@@ -169,8 +180,44 @@ function StoryScreen() {
       transition={{ duration: 1 }}
       className="w-full space-y-12 pb-24"
     >
-      <div className="prose prose-invert prose-zinc max-w-none prose-headings:font-mono prose-headings:tracking-tight prose-h1:text-white prose-p:leading-relaxed prose-p:text-zinc-300">
-        <ReactMarkdown>{sceneContent}</ReactMarkdown>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-zinc-800/50 pb-6">
+        <button
+          onClick={resetGame}
+          className="group flex items-center text-zinc-500 hover:text-white transition-colors font-mono text-xs tracking-widest uppercase"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+          Abort Investigation
+        </button>
+        <button
+          onClick={() => setIsScanning(!isScanning)}
+          className={`flex items-center px-5 py-2.5 rounded-full font-mono text-xs tracking-widest uppercase transition-all shadow-lg ${isScanning
+              ? isDark
+                ? 'bg-red-900/20 text-red-400 border border-red-900/50 shadow-red-900/20'
+                : 'bg-fuchsia-900/20 text-fuchsia-400 border border-fuchsia-900/50 shadow-fuchsia-900/20'
+              : 'bg-zinc-900/50 text-zinc-400 border border-zinc-800 hover:text-white hover:bg-zinc-800/50'
+            }`}
+        >
+          <Search className="w-4 h-4 mr-2" />
+          {isScanning ? 'Disable UV Scanner' : 'Activate UV Scanner'}
+        </button>
+      </div>
+
+      <div
+        ref={containerRef}
+        onMouseMove={handleMouseMove}
+        className="relative rounded-2xl transition-colors duration-500"
+      >
+        {isScanning && (
+          <div
+            className="pointer-events-none absolute inset-0 z-10 hidden sm:block mix-blend-screen"
+            style={{
+              background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, ${isDark ? 'rgba(153, 27, 27, 0.15)' : 'rgba(192, 38, 211, 0.15)'}, transparent 60%)`
+            }}
+          />
+        )}
+        <div className={`prose prose-invert prose-zinc max-w-none prose-headings:font-mono prose-headings:tracking-tight prose-h1:text-white prose-p:leading-relaxed prose-p:text-zinc-300 relative z-0 ${isScanning ? 'sm:cursor-crosshair selection:bg-black selection:text-white' : ''} ${isScanning && isDark ? 'prose-strong:text-red-400' : ''} ${isScanning && !isDark ? 'prose-strong:text-fuchsia-400' : ''}`}>
+          <ReactMarkdown>{sceneContent}</ReactMarkdown>
+        </div>
       </div>
 
       <motion.div
