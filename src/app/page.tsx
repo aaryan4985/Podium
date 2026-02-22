@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore, GameMode } from '@/store/gameStore';
-import { ArrowLeft, Loader2, Brain, Skull, Fingerprint, Eye, Search, AlertTriangle, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Loader2, Brain, Skull, Fingerprint, Eye, Search, AlertTriangle, ChevronRight, Lightbulb } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 export default function PodiumApp() {
@@ -152,11 +152,12 @@ function GeneratingScreen({ mode }: { mode: GameMode }) {
 }
 
 function StoryScreen() {
-  const { sceneContent, setUserGuessed, resetGame, mode } = useGameStore();
+  const { sceneContent, cluesContent, setUserGuessed, resetGame, mode } = useGameStore();
   const [guess, setGuess] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isScanning, setIsScanning] = useState(false);
+  const [showClues, setShowClues] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -188,18 +189,32 @@ function StoryScreen() {
           <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
           Abort Investigation
         </button>
-        <button
-          onClick={() => setIsScanning(!isScanning)}
-          className={`flex items-center px-5 py-2.5 rounded-full font-mono text-xs tracking-widest uppercase transition-all shadow-lg ${isScanning
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+          {cluesContent && (
+            <button
+              onClick={() => setShowClues(!showClues)}
+              className={`flex items-center px-4 py-2.5 rounded-full font-mono text-xs tracking-widest uppercase transition-all shadow-md ${showClues
+                  ? 'bg-zinc-200 text-black border border-white hover:bg-white'
+                  : 'bg-zinc-900/50 text-zinc-400 border border-zinc-800 hover:text-white hover:bg-zinc-800/50'
+                }`}
+            >
+              <Lightbulb className="w-4 h-4 mr-2" />
+              {showClues ? 'Hide Clues' : 'Review Clues'}
+            </button>
+          )}
+          <button
+            onClick={() => setIsScanning(!isScanning)}
+            className={`flex items-center px-5 py-2.5 rounded-full font-mono text-xs tracking-widest uppercase transition-all shadow-lg ${isScanning
               ? isDark
                 ? 'bg-red-900/20 text-red-400 border border-red-900/50 shadow-red-900/20'
                 : 'bg-fuchsia-900/20 text-fuchsia-400 border border-fuchsia-900/50 shadow-fuchsia-900/20'
               : 'bg-zinc-900/50 text-zinc-400 border border-zinc-800 hover:text-white hover:bg-zinc-800/50'
-            }`}
-        >
-          <Search className="w-4 h-4 mr-2" />
-          {isScanning ? 'Disable UV Scanner' : 'Activate UV Scanner'}
-        </button>
+              }`}
+          >
+            <Search className="w-4 h-4 mr-2" />
+            {isScanning ? 'Disable UV Scanner' : 'Activate UV Scanner'}
+          </button>
+        </div>
       </div>
 
       <div
@@ -219,6 +234,28 @@ function StoryScreen() {
           <ReactMarkdown>{sceneContent}</ReactMarkdown>
         </div>
       </div>
+
+      <AnimatePresence>
+        {showClues && cluesContent && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-6 md:p-8 mt-8 relative">
+              <div className="absolute top-0 left-0 w-2 h-full bg-yellow-500/50 rounded-l-2xl" />
+              <div className="flex items-center mb-6">
+                <Lightbulb className="w-5 h-5 text-yellow-500 mr-3" />
+                <h3 className="text-xl font-bold text-white font-mono tracking-widest uppercase m-0">Detective's Notes</h3>
+              </div>
+              <div className="prose prose-invert prose-zinc max-w-none prose-headings:font-mono prose-p:leading-relaxed prose-p:text-zinc-300">
+                <ReactMarkdown>{cluesContent}</ReactMarkdown>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <motion.div
         initial={{ y: 20, opacity: 0 }}

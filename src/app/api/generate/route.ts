@@ -59,8 +59,9 @@ STORY STRUCTURE:
 1. SCENE – Crime introduction (immersive noir tone).
 2. SUSPECTS – 3 to 5 distinct personalities.
 3. INTERROGATION – Dialogue-heavy psychological exchanges.
-4. DECISION – End with a prompt for the user's decision "Who is the killer?".
-5. REVEAL & PSYCHOLOGICAL BREAKDOWN – The mastermind revealed and analytical explanation section with 5 key points.
+4. CLUES – A separate list of psychological hints and obscure details for the detective.
+5. DECISION – End with a prompt for the user's decision "Who is the killer?".
+6. REVEAL & PSYCHOLOGICAL BREAKDOWN – The mastermind revealed and analytical explanation section with 5 key points.
 
 OUTPUT REQUIREMENTS:
 - Write in second-person perspective.
@@ -70,7 +71,7 @@ OUTPUT REQUIREMENTS:
 - The killer must always use psychological manipulation as part of their strategy.
 - Tone must be intelligent, strategic, and analytical.
 - Never glorify harmful behavior. Focus on awareness and understanding.
-- YOU MUST USE EXACTLY THESE SECTION HEADERS: SCENE, SUSPECTS, INTERROGATION, DECISION, REVEAL & PSYCHOLOGICAL BREAKDOWN (capitalized as such).
+- YOU MUST USE EXACTLY THESE SECTION HEADERS: SCENE, SUSPECTS, INTERROGATION, CLUES, DECISION, REVEAL & PSYCHOLOGICAL BREAKDOWN (capitalized as such).
 `;
 
         const chatCompletion = await groq.chat.completions.create({
