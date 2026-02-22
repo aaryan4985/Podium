@@ -13,12 +13,12 @@ export default function PodiumApp() {
   } = useGameStore();
 
   return (
-    <main className="min-h-screen bg-black text-zinc-300 font-sans selection:bg-fuchsia-900 selection:text-white flex flex-col">
+    <main className="min-h-screen bg-[#020202] text-zinc-300 font-sans selection:bg-fuchsia-500/30 selection:text-fuchsia-50 flex flex-col">
       {/* Background ambient light */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-900/10 blur-[120px] rounded-full mix-blend-screen" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-red-900/5 blur-[120px] rounded-full mix-blend-screen" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+        <div className="absolute top-[-30%] left-[-15%] w-[60%] h-[60%] bg-fuchsia-900/10 blur-[150px] rounded-full mix-blend-screen" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-red-900/10 blur-[150px] rounded-full mix-blend-screen" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
       </div>
 
       <div className="relative z-10 flex-grow flex flex-col px-6 py-12 md:py-24 max-w-5xl mx-auto w-full">
@@ -74,11 +74,11 @@ function ModeSelection() {
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
           <Fingerprint className="w-16 h-16 mx-auto mb-6 text-zinc-600 opacity-50" />
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-white uppercase text-glow font-mono">
-            Podium
+          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-white font-outfit text-glow mb-4">
+            PODIUM
           </h1>
         </motion.div>
-        <p className="text-xl md:text-2xl text-zinc-400 font-light tracking-wide">
+        <p className="text-lg md:text-xl text-zinc-400 font-light tracking-wide max-w-xl mx-auto">
           An immersive psychological detective platform.
         </p>
       </div>
@@ -89,17 +89,17 @@ function ModeSelection() {
           whileHover={{ scale: 1.02, y: -5 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => handleSelectMode('manipulation')}
-          className="group relative flex flex-col items-start text-left p-8 rounded-2xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-fuchsia-900/20"
+          className="group relative flex flex-col items-start text-left p-8 rounded-2xl border border-zinc-800/60 bg-white/[0.02] backdrop-blur-xl hover:bg-white/[0.04] transition-all duration-700 overflow-hidden shadow-2xl hover:shadow-fuchsia-900/20"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute top-0 right-0 w-32 h-32 bg-fuchsia-500/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-fuchsia-500/20 transition-colors duration-500" />
-          <Brain className="w-8 h-8 text-fuchsia-500 mb-6 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 relative z-10" />
-          <h2 className="text-2xl font-bold text-white mb-3 font-mono tracking-tight relative z-10">SHERLOCK</h2>
-          <p className="text-zinc-500 leading-relaxed text-sm mb-6 flex-grow relative z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="absolute top-0 right-0 w-40 h-40 bg-fuchsia-500/10 rounded-full blur-[50px] -mr-16 -mt-16 group-hover:bg-fuchsia-500/20 transition-colors duration-700" />
+          <Brain className="w-8 h-8 text-fuchsia-500 mb-8 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-700 relative z-10" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 font-outfit tracking-tight relative z-10 group-hover:text-fuchsia-100 transition-colors duration-500">SHERLOCK</h2>
+          <p className="text-zinc-500 leading-relaxed text-sm mb-8 flex-grow relative z-10 group-hover:text-zinc-400 transition-colors duration-500">
             Identify subtle, everyday psychological influence. Emotional framing, mirroring, misdirection, and authority bias masked within dialogue.
           </p>
-          <div className="flex items-center text-xs font-semibold text-fuchsia-500 tracking-widest uppercase relative z-10">
-            Start Investigation <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-2 transition-transform" />
+          <div className="flex items-center text-xs font-semibold text-fuchsia-500/80 tracking-widest uppercase relative z-10 group-hover:text-fuchsia-400 transition-colors duration-500">
+            Start Investigation <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-2 transition-transform duration-500" />
           </div>
         </motion.button>
 
@@ -108,17 +108,17 @@ function ModeSelection() {
           whileHover={{ scale: 1.02, y: -5 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => handleSelectMode('dark_manipulation')}
-          className="group relative flex flex-col items-start text-left p-8 rounded-2xl border border-zinc-900 bg-[#070707] hover:bg-[#0a0a0a] transition-all duration-500 overflow-hidden shadow-[0_0_30px_rgba(153,27,27,0)] hover:shadow-[0_0_40px_rgba(153,27,27,0.15)] hover:border-red-900/40"
+          className="group relative flex flex-col items-start text-left p-8 rounded-2xl border border-zinc-800/60 bg-[#040404] hover:bg-[#080808] transition-all duration-700 overflow-hidden shadow-2xl hover:shadow-[0_0_40px_rgba(153,27,27,0.15)] hover:border-red-900/40"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-red-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute bottom-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-3xl -mr-16 -mb-16 group-hover:bg-red-600/20 transition-colors duration-500" />
-          <Skull className="w-8 h-8 text-red-600 mb-6 group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500 relative z-10" />
-          <h2 className="text-2xl font-bold text-white mb-3 font-mono tracking-tight relative z-10">MORIARTY</h2>
-          <p className="text-zinc-500 leading-relaxed text-sm mb-6 flex-grow relative z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="absolute bottom-0 right-0 w-40 h-40 bg-red-600/10 rounded-full blur-[50px] -mr-16 -mb-16 group-hover:bg-red-600/20 transition-colors duration-700" />
+          <Skull className="w-8 h-8 text-red-600 mb-8 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-700 relative z-10" />
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 font-outfit tracking-tight relative z-10 group-hover:text-red-100 transition-colors duration-500">MORIARTY</h2>
+          <p className="text-zinc-500 leading-relaxed text-sm mb-8 flex-grow relative z-10 group-hover:text-zinc-400 transition-colors duration-500">
             Navigate high-intensity psychological pressure. Uncover coercive control, emotional destabilization, and strategic intimidation.
           </p>
-          <div className="flex items-center text-xs font-semibold text-red-600 tracking-widest uppercase relative z-10">
-            Enter The Abyss <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-2 transition-transform" />
+          <div className="flex items-center text-xs font-semibold text-red-600/80 tracking-widest uppercase relative z-10 group-hover:text-red-500 transition-colors duration-500">
+            Enter The Abyss <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-2 transition-transform duration-500" />
           </div>
         </motion.button>
       </div>
@@ -128,24 +128,61 @@ function ModeSelection() {
 
 function GeneratingScreen({ mode }: { mode: GameMode }) {
   const isDark = mode === 'dark_manipulation';
+  const phrases = isDark ? [
+    "ISOLATING PREDATORY PATTERNS...",
+    "ESTABLISHING PRESSURE VECTORS...",
+    "ANALYZING COERCIVE CONTROL...",
+    "SIMULATING EMOTIONAL DESTABILIZATION...",
+    "CALCULATING FEAR RESPONSES...",
+    "DECRYPTING POWER IMBALANCE..."
+  ] : [
+    "DECRYPTING MICRO-EXPRESSIONS...",
+    "ANALYZING COGNITIVE DISSONANCE...",
+    "EXTRACTING MANIPULATION VECTORS...",
+    "ISOLATING AUTHORITY BIAS...",
+    "COMPILING SUSPECT DOSSIER...",
+    "MAPPING EMOTIONAL FRAMING..."
+  ];
+
+  const [text, setText] = useState(phrases[0]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setText(phrases[Math.floor(Math.random() * phrases.length)]);
+    }, 600);
+    return () => clearInterval(interval);
+  }, [isDark]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col items-center justify-center flex-grow h-full space-y-8"
+      className="flex flex-col items-center justify-center flex-grow h-full space-y-12"
     >
       <div className="relative">
-        <div className={`absolute inset-0 blur-2xl rounded-full opacity-20 ${isDark ? 'bg-red-600' : 'bg-fuchsia-600'} animate-pulse`} />
-        <Loader2 className={`w-12 h-12 animate-spin relative ${isDark ? 'text-red-500' : 'text-fuchsia-500'}`} />
+        <div className={`absolute inset-0 blur-3xl rounded-full opacity-30 ${isDark ? 'bg-red-600' : 'bg-fuchsia-600'} animate-pulse`} />
+        <div className="relative flex items-center justify-center w-24 h-24 border border-zinc-800/50 rounded-full bg-black/50 backdrop-blur-md">
+          <Loader2 className={`w-10 h-10 animate-spin ${isDark ? 'text-red-500' : 'text-fuchsia-500'}`} />
+          <div className={`absolute inset-0 rounded-full border border-t-[3px] border-b-[1px] animate-[spin_3s_linear_infinite] ${isDark ? 'border-red-500/30' : 'border-fuchsia-500/30'}`} />
+          <div className={`absolute inset-0 rounded-full border border-l-[2px] border-r-[1px] animate-[spin_2s_linear_infinite_reverse] ${isDark ? 'border-red-400/20' : 'border-fuchsia-400/20'}`} />
+        </div>
       </div>
-      <div className="text-center space-y-2">
-        <p className="text-zinc-400 font-mono text-sm tracking-widest uppercase animate-pulse">
-          Interfacing with psychological engine...
-        </p>
-        <p className="text-zinc-600 text-xs">
-          {isDark ? "Establishing pressure environment." : "Weaving dialogue patterns."}
-        </p>
+
+      <div className="text-center space-y-4 max-w-lg w-full bg-[#050505] border border-zinc-800/80 p-6 rounded-2xl font-mono shadow-2xl">
+        <div className="flex items-center justify-between text-xs text-zinc-500 mb-4 border-b border-zinc-800/50 pb-3">
+          <span className="tracking-widest">SYSTEM.STATUS</span>
+          <span className={isDark ? "text-red-500 animate-pulse tracking-widest font-bold" : "text-fuchsia-500 animate-pulse tracking-widest font-bold"}>PROCESSING</span>
+        </div>
+        <div className="flex items-start">
+          <span className="text-zinc-600 mr-3 animate-pulse">&gt;</span>
+          <p className={`text-sm tracking-widest uppercase text-left w-full h-10 ${isDark ? 'text-red-400/80' : 'text-fuchsia-400/80'}`}>
+            {text}
+          </p>
+        </div>
+        <div className="w-full h-1 bg-zinc-900 rounded-full overflow-hidden mt-4">
+          <div className={`h-full animate-pulse transition-all duration-1000 ${isDark ? 'bg-red-600' : 'bg-fuchsia-600'} w-[70%]`} />
+        </div>
       </div>
     </motion.div>
   );
@@ -194,8 +231,8 @@ function StoryScreen() {
             <button
               onClick={() => setShowClues(!showClues)}
               className={`flex items-center px-4 py-2.5 rounded-full font-mono text-xs tracking-widest uppercase transition-all shadow-md ${showClues
-                  ? 'bg-zinc-200 text-black border border-white hover:bg-white'
-                  : 'bg-zinc-900/50 text-zinc-400 border border-zinc-800 hover:text-white hover:bg-zinc-800/50'
+                ? 'bg-zinc-200 text-black border border-white hover:bg-white'
+                : 'bg-zinc-900/50 text-zinc-400 border border-zinc-800 hover:text-white hover:bg-zinc-800/50'
                 }`}
             >
               <Lightbulb className="w-4 h-4 mr-2" />
@@ -230,8 +267,25 @@ function StoryScreen() {
             }}
           />
         )}
-        <div className={`prose prose-invert prose-zinc max-w-none prose-headings:font-mono prose-headings:tracking-tight prose-h1:text-white prose-p:leading-relaxed prose-p:text-zinc-300 relative z-0 ${isScanning ? 'sm:cursor-crosshair selection:bg-black selection:text-white' : ''} ${isScanning && isDark ? 'prose-strong:text-red-400' : ''} ${isScanning && !isDark ? 'prose-strong:text-fuchsia-400' : ''}`}>
-          <ReactMarkdown>{sceneContent}</ReactMarkdown>
+        <div className={`prose prose-invert prose-zinc max-w-none prose-headings:font-outfit prose-headings:tracking-tight prose-h1:text-white prose-p:leading-relaxed prose-p:text-zinc-300 relative z-0 ${isScanning ? 'sm:cursor-crosshair selection:bg-black selection:text-white' : ''}`}>
+          <ReactMarkdown
+            components={{
+              strong: ({ node, children }) => (
+                <span
+                  className={`font-semibold transition-all duration-500 px-1 rounded ${isScanning
+                      ? isDark
+                        ? 'text-red-400 bg-red-950/40 shadow-[0_0_10px_rgba(248,113,113,0.2)]'
+                        : 'text-fuchsia-400 bg-fuchsia-950/40 shadow-[0_0_10px_rgba(232,121,249,0.2)]'
+                      : 'text-transparent bg-zinc-800 select-none'
+                    }`}
+                >
+                  {children}
+                </span>
+              )
+            }}
+          >
+            {sceneContent}
+          </ReactMarkdown>
         </div>
       </div>
 
@@ -249,8 +303,18 @@ function StoryScreen() {
                 <Lightbulb className="w-5 h-5 text-yellow-500 mr-3" />
                 <h3 className="text-xl font-bold text-white font-mono tracking-widest uppercase m-0">Detective's Notes</h3>
               </div>
-              <div className="prose prose-invert prose-zinc max-w-none prose-headings:font-mono prose-p:leading-relaxed prose-p:text-zinc-300">
-                <ReactMarkdown>{cluesContent}</ReactMarkdown>
+              <div className="prose prose-invert prose-zinc max-w-none prose-headings:font-outfit prose-p:leading-relaxed prose-p:text-zinc-300">
+                <ReactMarkdown
+                  components={{
+                    strong: ({ node, children }) => (
+                      <span className="text-yellow-400 bg-yellow-950/30 px-1 rounded font-semibold">
+                        {children}
+                      </span>
+                    )
+                  }}
+                >
+                  {cluesContent}
+                </ReactMarkdown>
               </div>
             </div>
           </motion.div>
@@ -265,8 +329,8 @@ function StoryScreen() {
       >
         <div className="max-w-2xl mx-auto glass-panel p-8 rounded-xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-fuchsia-500 to-transparent" />
-          <h3 className="flex items-center text-xl font-bold text-white mb-6 font-mono">
-            <Search className="w-5 h-5 mr-3 text-fuchsia-500" />
+          <h3 className="flex items-center text-2xl font-bold text-white mb-6 font-outfit">
+            <Search className="w-6 h-6 mr-3 text-fuchsia-500" />
             IDENTIFY THE MASTERMIND
           </h3>
           <p className="text-zinc-400 mb-8 text-sm">
@@ -278,12 +342,12 @@ function StoryScreen() {
               value={guess}
               onChange={(e) => setGuess(e.target.value)}
               placeholder="Enter suspect name..."
-              className="flex-grow bg-black/50 border border-zinc-800 rounded-lg px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-fuchsia-500/50 focus:ring-1 focus:ring-fuchsia-500/50 transition-all font-mono"
+              className="flex-grow bg-white/5 backdrop-blur-md border border-white/10 rounded-xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-fuchsia-500/50 focus:ring-1 focus:ring-fuchsia-500/50 transition-all font-outfit text-lg"
             />
             <button
               type="submit"
               disabled={guess.trim().length === 0}
-              className="bg-white text-black font-semibold px-8 py-3 rounded-lg hover:bg-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="bg-white text-black font-semibold font-outfit text-lg tracking-wide px-10 py-4 rounded-xl hover:bg-zinc-200 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
             >
               Analyze
             </button>
