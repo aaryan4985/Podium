@@ -85,36 +85,42 @@ function ModeSelection() {
 
       <div className="grid md:grid-cols-2 gap-8 w-full max-w-4xl">
         {/* Mode 1 */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02, y: -5 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => handleSelectMode('manipulation')}
-          className="group relative flex flex-col items-start text-left p-8 rounded-2xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 transition-all duration-500 overflow-hidden"
+          className="group relative flex flex-col items-start text-left p-8 rounded-2xl border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 transition-all duration-500 overflow-hidden shadow-lg hover:shadow-fuchsia-900/20"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <Brain className="w-8 h-8 text-fuchsia-500 mb-6 group-hover:scale-110 transition-transform duration-500" />
-          <h2 className="text-2xl font-bold text-white mb-3 font-mono tracking-tight">MANIPULATION</h2>
-          <p className="text-zinc-500 leading-relaxed text-sm mb-6 flex-grow">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-fuchsia-500/10 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-fuchsia-500/20 transition-colors duration-500" />
+          <Brain className="w-8 h-8 text-fuchsia-500 mb-6 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500 relative z-10" />
+          <h2 className="text-2xl font-bold text-white mb-3 font-mono tracking-tight relative z-10">SHERLOCK</h2>
+          <p className="text-zinc-500 leading-relaxed text-sm mb-6 flex-grow relative z-10">
             Identify subtle, everyday psychological influence. Emotional framing, mirroring, misdirection, and authority bias masked within dialogue.
           </p>
-          <div className="flex items-center text-xs font-semibold text-fuchsia-500 tracking-widest uppercase">
-            Start Investigation <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+          <div className="flex items-center text-xs font-semibold text-fuchsia-500 tracking-widest uppercase relative z-10">
+            Start Investigation <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-2 transition-transform" />
           </div>
-        </button>
+        </motion.button>
 
         {/* Mode 2 */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02, y: -5 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => handleSelectMode('dark_manipulation')}
-          className="group relative flex flex-col items-start text-left p-8 rounded-2xl border border-zinc-900 bg-[#070707] hover:bg-[#0a0a0a] transition-all duration-500 overflow-hidden shadow-[0_0_30px_rgba(153,27,27,0)] hover:shadow-[0_0_30px_rgba(153,27,27,0.1)] hover:border-red-900/30"
+          className="group relative flex flex-col items-start text-left p-8 rounded-2xl border border-zinc-900 bg-[#070707] hover:bg-[#0a0a0a] transition-all duration-500 overflow-hidden shadow-[0_0_30px_rgba(153,27,27,0)] hover:shadow-[0_0_40px_rgba(153,27,27,0.15)] hover:border-red-900/40"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-red-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <Skull className="w-8 h-8 text-red-600 mb-6 group-hover:scale-110 transition-transform duration-500" />
-          <h2 className="text-2xl font-bold text-white mb-3 font-mono tracking-tight">DARK MANIPULATION</h2>
-          <p className="text-zinc-500 leading-relaxed text-sm mb-6 flex-grow">
+          <div className="absolute bottom-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-3xl -mr-16 -mb-16 group-hover:bg-red-600/20 transition-colors duration-500" />
+          <Skull className="w-8 h-8 text-red-600 mb-6 group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500 relative z-10" />
+          <h2 className="text-2xl font-bold text-white mb-3 font-mono tracking-tight relative z-10">MORIARTY</h2>
+          <p className="text-zinc-500 leading-relaxed text-sm mb-6 flex-grow relative z-10">
             Navigate high-intensity psychological pressure. Uncover coercive control, emotional destabilization, and strategic intimidation.
           </p>
-          <div className="flex items-center text-xs font-semibold text-red-600 tracking-widest uppercase">
-            Enter The Abyss <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+          <div className="flex items-center text-xs font-semibold text-red-600 tracking-widest uppercase relative z-10">
+            Enter The Abyss <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-2 transition-transform" />
           </div>
-        </button>
+        </motion.button>
       </div>
     </motion.div>
   );
